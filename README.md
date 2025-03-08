@@ -185,6 +185,8 @@ php bin/magento indexer:reindex
 * You also need to map this new status to an appropriate order state.
 
 * Without mapping, Magento won’t recognize the custom status for transitions.
+  
+![image](https://github.com/user-attachments/assets/0979cca9-a4ff-44ec-a91f-a9d4b613ebf0)
 
 3️⃣ **Forcing Status Updates**
 
@@ -194,7 +196,7 @@ php bin/magento indexer:reindex
 
 4️⃣ **Email Notifications**
 
-* To send order-related emails (e.g., when an order is shipped), SMTP configuration and email server credentials are required.
+* SMTP configuration and email server credentials are required to send order-related emails (e.g., when an order is shipped).
 
 * The email function is implemented but commented out to avoid errors if SMTP is not configured.
 
