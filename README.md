@@ -179,6 +179,7 @@ php bin/magento indexer:reindex
 * When updating an order’s status via API, the new status must be mapped to the order’s current state.
 
 * If the status does not belong to the order’s state, the transition will not happen.
+![Screenshot 2025-03-08 164136](https://github.com/user-attachments/assets/3144f259-6428-4094-b11a-b841346787fa)
 
 2️⃣ **Custom Order Status**
 
