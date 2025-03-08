@@ -72,7 +72,7 @@ This API requires authentication via a Bearer Token.
 
 ### Get Admin Token (POST request)
 ```
-POST http://mage2rock.magento.com/rest/V1/integration/admin/token
+POST http://yourmagentodomain/rest/V1/integration/admin/token
 ```
 #### Request Body
 ```json
@@ -110,12 +110,14 @@ Use this token in the `Authorization` header for all API requests.
 ## 7️⃣ How to Use in Postman
 1. Open **Postman**.
 2. Select **POST** request.
-3. Enter the API URL: `http://mage2rock.magento.com/rest/V1/orderstatus/update`
+3. Enter the API URL: `http://yourmagentodomain/rest/V1/orderstatus/update`
 4. Go to the **Headers** tab and add:
    - **Key:** `Content-Type`, **Value:** `application/json`
    - **Key:** `Authorization`, **Value:** `Bearer your_generated_token`
 5. Go to the **Body** tab and select **raw**, then paste the JSON request body.
 6. Click **Send**.
+7. For the local development (your current system) API check, download the desktop agent, otherwise it will not work .
+![Screenshot 2025-03-08 163829](https://github.com/user-attachments/assets/3b2b17dc-547a-4ca2-8579-fae2f1e8eeb3)
 
 ---
 
@@ -206,8 +208,6 @@ php bin/magento indexer:reindex
 5️⃣ **Observer Handling**
 
 * When the API updates an order status, an observer listens for changes and logs them in a custom database table.
-
-* This observer only runs when the API is called, not when an order is placed via the frontend.
 
 * This ensures that only API-triggered status changes are logged, as per the module’s requirements.
 * 
