@@ -209,6 +209,16 @@ php bin/magento indexer:reindex
 * This observer only runs when the API is called, not when an order is placed via the frontend.
 
 * This ensures that only API-triggered status changes are logged, as per the module’s requirements.
-  
+* 
+## 🔹 Few Important module flow understanding from images
+* **After the Order save via API, the order status updates the data that goes into the custom log table**
+![download (2)](https://github.com/user-attachments/assets/ca9b60d6-e58c-4e25-9cde-4fdc9ddb58d4)
 
-![Uploading download (2).png…]()
+* **If you assign some new status for an order and for that order's state, if it does not have the mapping of that status, the transition is not allowed. For that you have to create a new status from the admin panel**
+![Screenshot 2025-03-08 145543](https://github.com/user-attachments/assets/5bc59aee-5f26-4fa7-91da-9fa408af00f4)
+
+* **You have to get the Bearer token for admin as this api requires admin access authorization**
+![Screenshot 2025-03-08 145508](https://github.com/user-attachments/assets/733c8bba-9f79-4d2d-8b9c-b9f5f7558a57)
+
+* **If you access the API short of token then you get the below error.**
+![Screenshot 2025-03-08 144213](https://github.com/user-attachments/assets/e2148c68-0b79-4337-87fd-bcf38a1e281a)
