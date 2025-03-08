@@ -187,6 +187,7 @@ php bin/magento indexer:reindex
 * Without mapping, Magento won’t recognize the custom status for transitions.
   
 ![image](https://github.com/user-attachments/assets/0979cca9-a4ff-44ec-a91f-a9d4b613ebf0)
+![Screenshot 2025-03-08 151326](https://github.com/user-attachments/assets/81f6e403-ecd6-404e-ab3f-d0a41ec78a09)
 
 3️⃣ **Forcing Status Updates**
 
@@ -216,6 +217,7 @@ php bin/magento indexer:reindex
 
 * **If you assign some new status for an order and for that order's state, if it does not have the mapping of that status, the transition is not allowed. For that you have to create a new status from the admin panel**
 ![Screenshot 2025-03-08 145543](https://github.com/user-attachments/assets/5bc59aee-5f26-4fa7-91da-9fa408af00f4)
+![Screenshot 2025-03-08 151326](https://github.com/user-attachments/assets/81f6e403-ecd6-404e-ab3f-d0a41ec78a09)
 
 * **You have to get the Bearer token for admin as this api requires admin access authorization**
 ![Screenshot 2025-03-08 145508](https://github.com/user-attachments/assets/733c8bba-9f79-4d2d-8b9c-b9f5f7558a57)
