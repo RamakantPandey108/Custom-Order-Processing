@@ -128,8 +128,7 @@ php bin/magento indexer:reindex
 ```
 
 ---
-
-📘 Architectural Decisions
+## 9 Architectural Decisions
 Module Structure & Best Practices
 
 The module follows Magento 2’s standard structure (app/code/Vendor/CustomOrderProcessing).
