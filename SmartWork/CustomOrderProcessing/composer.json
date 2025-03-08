@@ -1,0 +1,20 @@
+{
+    "name": "smartwork/custom-order-processing",
+    "description": "Custom Magento 2 module for enhancing order status processing workflow.",
+    "require": {
+        "php": ">=7.4",
+        "magento/framework": "*",
+        "magento/module-sales": "*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "OSL-3.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "SmartWork\\CustomOrderProcessing\\": ""
+        }
+    }
+}
