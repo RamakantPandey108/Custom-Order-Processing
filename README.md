@@ -128,63 +128,83 @@ php bin/magento indexer:reindex
 ```
 
 ---
-## 9 Architectural Decisions
-Module Structure & Best Practices
+## 9️⃣ Architectural Decisions
 
-The module follows Magento 2’s standard structure (app/code/Vendor/CustomOrderProcessing).
-Uses dependency injection (DI) to avoid direct ObjectManager calls.
-Follows PSR-4 autoloading for class structures.
-Order Status Update API
+**Module Structure & Best Practices**
 
-A REST API endpoint (POST /V1/orderstatus/update) allows external systems to update the order status.
-Uses Magento API authentication (Bearer Token) for security.
-Validates order existence and status transition before updating.
-Event Observer for Order Status Change
+* Follows Magento 2’s standard structure (app/code/SmartWork/CustomOrderProcessing).
 
-Listens to sales_order_save_after event.
-Stores order status changes in a custom database table (custom_order_status_log).
-If an order is marked as shipped, it triggers an email notification using Magento's email system.
-Performance Optimization
+* Uses dependency injection (DI) to avoid direct ObjectManager calls.
 
-Uses Magento repositories instead of direct SQL queries to interact with orders.
-Optimized database operations (indexed queries, bulk inserts when needed).
-Uses logging and error handling to debug issues effectively.
-Scalability & Maintainability
+* Follows PSR-4 autoloading for class structures.
 
-The module can be extended easily to add more order processing logic.
-Separate service classes ensure the code remains clean and maintainable.
+**Order Status Update API**
 
----
+* Implements a REST API endpoint (POST /V1/orderstatus/update).
 
-🔹 Important Notes About Order Status Updates
-1️⃣ Order Status Transition Rules
+* Uses Magento API authentication (Bearer Token) for security.
 
-Every order in Magento has a state and a status.
-If you try to update an order's status via API, the new status must be mapped to the order’s current state.
-If the status does not belong to the order’s state, the transition will not happen.
+* Validates order existence and status transition before updating.
 
-2️⃣ Custom Order Status
+**Event Observer for Order Status Change**
 
-If you need a custom order status, you must first create it in the Magento admin panel.
-You also need to map this new status to an appropriate order state.
-Without mapping, Magento won’t recognize the custom status for transitions.
+* Listens to the sales_order_save_after event.
 
-![alt text](image.png)
+* Stores order status changes in a custom database table (custom_order_status_log).
 
-3️⃣ Forcing Status Updates
+* If an order is marked as shipped, it triggers an email notification to the customer.
 
-While it is possible to bypass these rules(1,2) and force a status update programmatically, it is not recommended.
-Magento maintains strict internal mappings between states and statuses, and forcing a status change may cause unexpected issues in future processing.
+**Performance Optimization**
 
-4️⃣ Email Notifications
+* Uses Magento repositories instead of direct SQL queries for order data.
 
-To send order-related emails (e.g., order shipped), SMTP configuration and email server credentials are required.
-In this module, the email function is implemented but commented out to avoid errors if SMTP is not configured.
-Instead, a log entry is created to confirm when the email function is triggered upon status change(shipped one).
+* Optimized database operations (indexed queries, bulk inserts when needed).
 
-5️⃣ Observer Handling
+* Implements logging and error handling to debug issues effectively.
 
-When the API updates an order status, an observer listens for changes and logs(database entry) them in a custom table.
-This observer runs only when the API is called, not when an order is placed via the frontend.
-This ensures that only API-triggered status changes are logged, as per the module’s requirements.
+**Scalability & Maintainability**
+
+* The module is easily extendable to add more order processing logic.
+
+* Uses separate service classes to keep the code clean and maintainable.
+
+## 🔹 Important Notes About Order Status Updates
+
+1️⃣ **Order Status Transition Rules**
+
+* Every order in Magento has a state and a status.
+
+* When updating an order’s status via API, the new status must be mapped to the order’s current state.
+
+* If the status does not belong to the order’s state, the transition will not happen.
+
+2️⃣ **Custom Order Status**
+
+* To create a custom order status, you must first add it in the Magento admin panel.
+
+* You also need to map this new status to an appropriate order state.
+
+* Without mapping, Magento won’t recognize the custom status for transitions.
+
+3️⃣ **Forcing Status Updates**
+
+* Although you can bypass transition rules and force a status update programmatically, it is not recommended.
+
+* Magento maintains strict internal mappings between states and statuses, and forcing a status change may cause unexpected issues.
+
+4️⃣ **Email Notifications**
+
+* To send order-related emails (e.g., when an order is shipped), SMTP configuration and email server credentials are required.
+
+* The email function is implemented but commented out to avoid errors if SMTP is not configured.
+
+* Instead, a log entry confirms when the email function is triggered upon status change.
+
+5️⃣ **Observer Handling**
+
+* When the API updates an order status, an observer listens for changes and logs them in a custom database table.
+
+* This observer only runs when the API is called, not when an order is placed via the frontend.
+
+* This ensures that only API-triggered status changes are logged, as per the module’s requirements.
 
