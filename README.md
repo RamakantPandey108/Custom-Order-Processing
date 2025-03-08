@@ -209,4 +209,6 @@ php bin/magento indexer:reindex
 * This observer only runs when the API is called, not when an order is placed via the frontend.
 
 * This ensures that only API-triggered status changes are logged, as per the module’s requirements.
+  
 
+![Uploading download (2).png…]()
